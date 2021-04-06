@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int main()
+{
+    int i = 0, aux = 0, a, x1, x2;
+    char dig, str[50] = " ", str2[5] = " ";
+    int * num = NULL;
+    int * dem = NULL; 
+    num = malloc(sizeof(num));
+    dem = malloc(sizeof(dem));
+    
+    scanf("%c", &dig);
+    while (dig != '\n' && dig != '\0')
+    {
+        if (dig == '/')
+        {
+            num = realloc(num, sizeof(num)* (i+1));
+            dem[i] = atoi(str);
+            // printf("%d\n", atoi(str));
+            aux = 1;
+            strcpy(str, "0");
+        }
+        if (dig == ' ')
+        {
+            dem = realloc(dem, sizeof(dem)* (i+1));
+            dem[i] = atoi(str);
+            // printf("%d\n", atoi(str));
+            aux = 0;
+            strcpy(str, "0");
+            i++;
+        }
+        str2[0] = dig;
+        strcat(str, str2);
+        printf("strcat :%s %s %s\n", strcat(str, str2), str, str2);
+        
+        scanf("%c", &dig);
+    }
+    dem = realloc(dem, sizeof(dem)* (i+1));
+    dem[i] = atoi(str);
+    aux = 0;
+    strcpy(str, "0");
+    i++;
+    for (a = 0; a < i; a++)
+    {
+        printf("%d %d\n", num[a], dem[a]);
+    }
+    
+    free(num);
+    free(dem);
+    return 0;
+}
