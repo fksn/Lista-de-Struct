@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+typedef struct pontos
+{
+    double u, x, y, z;
+} Pontos;
+int main()
+{
+    double cont;
+    int i, n;
+    Pontos * p = NULL;
+    scanf("%d", &n);
+    p = malloc(sizeof(Pontos)*n);
+    for ( i = 0; i < n; i++)
+    {
+        scanf("%lf %lf %lf %lf", &p[i].u, &p[i].x, &p[i].y, &p[i].z);
+    }
+    for ( i = 1; i < n; i++)
+    {
+        cont = sqrt((pow(p[i-1].u-p[i].u,2)) + (pow(p[i-1].x-p[i].x,2)) + (pow(p[i-1].y-p[i].y,2)) + (pow(p[i-1].z-p[i].z,2)));
+        printf("%.2lf\n", cont);
+    }
+    free(p);
+    return 0;
+}
