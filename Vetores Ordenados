@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+typedef struct pontos
+{
+    double a, b, c, d, norma;
+} Pontos;
+
+int main()
+{
+    int i, n, x;
+    double a, b, c, d, e;
+    Pontos * p = NULL;
+    double preco_total;
+    scanf("%d", &n);
+    p = malloc(sizeof(Pontos)*n);
+    for ( i = 0; i < n; i++)
+    {
+        scanf("%lf %lf %lf %lf", &p[i].a, &p[i].b, &p[i].c, &p[i].d);
+        p[i].norma = sqrt( p[i].a * p[i].a + p[i].b * p[i].b + p[i].c * p[i].c + p[i].d * p[i].d);
+    }
+    for ( i = 0; i < n; i++)
+    {
+        for (x = 0; x < n; x++)
+        {
+            if (p[i].norma>p[x].norma)
+            {
+                a = p[i].a; 
+                b = p[i].b;
+                c = p[i].c;
+                d = p[i].d;
+                e = p[i].norma;
+                p[i].a = p[x].a;
+                p[i].b = p[x].b;
+                p[i].c = p[x].c;
+                p[i].d = p[x].d;
+                p[i].norma = p[x].norma;
+                p[x].a = a;
+                p[x].b = b;
+                p[x].c = c;
+                p[x].d = d;
+                p[x].norma = e;
+            }
+        }
+    }
+    for ( i = n-1; i >=0; i--)
+    {
+        printf("Vetor: (%.2lf, %.2lf, %.2lf, %.2lf) Norma: %.2lf\n", p[i].a, p[i].b, p[i].c, p[i].d, p[i].norma);
+    }
+    free(p);
+    return 0;
+}
