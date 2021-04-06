@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+typedef struct cursos
+{
+    int cod;
+    double valor;
+    char * curso;
+} Cursos;
+
+typedef struct alunos
+{
+    char * aluno;
+    int cod_c, qtd_creditos;
+} Alunos;
+
+int main()
+{
+    int i, n, x, j;
+    char str1[1000], str2[1000];
+
+    Cursos * p1 = NULL;
+    Alunos * p2 = NULL;
+    char * pc = NULL;
+    char * pa = NULL;
+    scanf("%d", &n);
+    p1 = malloc(sizeof(Cursos)*n);
+    for ( i = 0; i < n; i++)
+    {
+        scanf("%d %lf %[^\n]", &p1[i].cod, &p1[i].valor, str1);
+        pc = malloc(sizeof(str1)+1);
+        strcpy(pc, str1);
+        p1[i].curso = pc;
+        // printf("%s %lu %p\n", p1[i].curso, strlen(p1[i].curso), p1[i].curso);
+    }
+
+    scanf("%d", &x);
+    p2 = malloc(sizeof(Cursos)*x);
+    for ( i = 0; i < x; i++)
+    {
+        scanf("%*c%[^\n] %d %d", str2, &p2[i].cod_c, &p2[i].qtd_creditos);
+        pa = malloc(sizeof(str2)+1);
+        strcpy(pa, str2);
+        p2[i].aluno = pa;
+        // printf("%s %lu %p\n", p2[i].aluno, strlen(p2[i].aluno), p2[i].aluno);
+    }
+    for ( i = 0; i < x; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            if(p2[i].cod_c == p1[j].cod)
+            {
+                printf("Aluno(a): %s Curso: %s Num. Creditos: %d Valor Credito: %.2lf Mensalidade: %.2lf\n", p2[i].aluno, p1[j].curso, p2[i].qtd_creditos, p1[j].valor, p2[i].qtd_creditos*p1[j].valor);
+            }
+        }
+    }
+    free(p1);
+    free(p2);
+    free(pc);
+    free(pa);
+    free(p1[i].curso);
+    free(p2[i].aluno);
+    
+    return 0;
+  }
