@@ -1,0 +1,96 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+typedef struct dados
+{
+    int qtd, m2, media;
+} Dados;
+
+int main()
+{
+    int i = 0, n, x, j, I, J, aux1, aux2, aux3, soma_qtd, soma_m2, a, cont;
+    Dados * p = NULL;
+    int vet[201], vet2[201];
+    p = malloc(sizeof(Dados));
+    scanf("%d", &x);
+    
+    while (x != 0)
+    { 
+        if (i!=0)
+        {
+            printf("\n");
+        }
+        
+        for (a = 0; a < 201; a++)
+        {
+            vet[a] = 0;
+            vet2[a] = 0;
+        }
+        cont = 0;
+        soma_m2 = soma_qtd = 0;
+        i++;
+        
+        p = realloc(p, sizeof(Dados)*x);
+        for (j = 0; j < x; j++)
+        {
+            scanf("%d %d", &p[j].qtd, &p[j].m2);
+            
+            if (((double) p[j].m2 / p[j].qtd) - (p[j].m2 / p[j].qtd) != 0)
+            {
+                p[j].media = p[j].m2 / p[j].qtd;
+                vet2[p[j].media] = (vet2[p[j].media] + p[j].qtd) ;
+                cont++;
+            }
+            else
+            {
+                p[j].media = p[j].m2 / p[j].qtd;
+                vet[p[j].media] = vet[p[j].media] + p[j].qtd;
+                cont++;
+            }
+            soma_m2+= p[j].m2;
+            soma_qtd+= p[j].qtd;
+        }
+        cont = 0;
+        printf("Cidade# %d:\n", i);
+        for (a = 0; a < 201; a++)
+        {
+            if (vet2[a] != 0)
+            {
+                cont++;
+            }
+            if (vet[a] != 0)
+            {
+                cont++;
+            }
+        }
+        for (a = 0; a < 201; a++)
+        {
+            if (vet2[a] != 0)
+            {
+                printf("%d-%d", vet2[a], a);
+                if (cont-1>0)
+                {
+                    printf(" ");
+                    cont--;
+                }
+            }
+            if (vet[a] != 0)
+            {
+                printf("%d-%d", vet[a], a);
+                if (cont-1>0)
+                {
+                    printf(" ");
+                    cont--;
+                }
+            }
+            
+            
+        }
+        printf("\n");
+        printf("Consumo medio: %.2lf m3.\n", (double)soma_m2 / soma_qtd);
+        scanf("%d", &x);
+    }
+    free(p);
+    return 0;
+}
