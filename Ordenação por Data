@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+typedef struct alunos
+{
+    int mat, dia, mes, ano, aux;
+    char nome[200];
+} Alunos;
+int main()
+{
+    int i, n, x, d,m,a,aux, mat;
+    char str[200];
+    Alunos * p = NULL;
+    scanf("%d", &n);
+    p = malloc(sizeof(Alunos)*n);
+    for ( i = 0; i < n; i++)
+    {
+        scanf("%d %d %d %d %[^\n]", &p[i].mat, &p[i].dia, &p[i].mes, &p[i].ano, p[i].nome);
+        p[i].aux = p[i].ano * 10000 + p[i].mes * 100 + p[i].dia;
+    }
+    for ( i = 0; i < n; i++)
+    {
+        for ( x = 0; x < n; x++)
+        {
+            if (p[x].aux>p[i].aux)
+            {
+                mat = p[i].mat;
+                d = p[i].dia;
+                m = p[i].mes;
+                a = p[i].ano;
+                aux = p[i].aux;
+                strcpy(str, p[i].nome);
+
+                p[i].mat = p[x].mat;
+                p[i].dia = p[x].dia;
+                p[i].mes = p[x].mes;
+                p[i].ano = p[x].ano;
+                p[i].aux = p[x].aux;
+                strcpy(p[i].nome, p[x].nome);
+
+                p[x].mat = mat;
+                p[x].dia = d;
+                p[x].mes = m;
+                p[x].ano = a;
+                p[x].aux = aux;
+                strcpy(p[x].nome, str);
+            }
+        }
+    }
+    for ( i = n-1; i >=0; i--)
+    {
+        printf("Matric.: %d Nome: %s Data Nasc: %d/%d/%d\n", p[i].mat, p[i].nome, p[i].dia, p[i].mes, p[i].ano);
+    }
+    free(p);
+    return 0;
+}
