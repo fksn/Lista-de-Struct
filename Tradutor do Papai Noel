@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+typedef struct feliznatal
+{
+    char pais[50],feliz[50];
+} Natal;
+int main()
+{
+    int i, aux = 24;
+    char str[30];
+    Natal * p = NULL;
+    p = malloc(sizeof(Natal)*aux);
+    strcpy(p[0].pais, "brasil");
+    strcpy(p[1].pais, "alemanha");
+    strcpy(p[2].pais, "austria");
+    strcpy(p[3].pais, "coreia");
+    strcpy(p[4].pais, "espanha");
+    strcpy(p[5].pais, "grecia");
+    strcpy(p[6].pais, "estados-unidos");
+    strcpy(p[7].pais, "inglaterra");
+    strcpy(p[8].pais, "australia");
+    strcpy(p[9].pais, "portugal");
+    strcpy(p[10].pais, "suecia");
+    strcpy(p[11].pais, "turquia");
+    strcpy(p[12].pais, "argentina");
+    strcpy(p[13].pais, "chile");
+    strcpy(p[14].pais, "mexico");
+    strcpy(p[15].pais, "antardida");
+    strcpy(p[16].pais, "canada");
+    strcpy(p[17].pais, "irlanda");
+    strcpy(p[18].pais, "belgica");
+    strcpy(p[19].pais, "italia");
+    strcpy(p[20].pais, "libia");
+    strcpy(p[21].pais, "siria");
+    strcpy(p[22].pais, "marrocos");
+    strcpy(p[23].pais, "japao");
+    strcpy(p[0].feliz, "Feliz Natal!");
+    strcpy(p[1].feliz, "Frohliche Weihnachten!");
+    strcpy(p[2].feliz, "Frohe Weihnacht!");
+    strcpy(p[3].feliz, "Chuk Sung Tan!");
+    strcpy(p[4].feliz, "Feliz Navidad!");
+    strcpy(p[5].feliz, "Kala Christougena!");
+    strcpy(p[6].feliz, "Merry Christmas!");
+    strcpy(p[7].feliz, "Merry Christmas!");
+    strcpy(p[8].feliz, "Merry Christmas!");
+    strcpy(p[9].feliz, "Feliz Natal!");
+    strcpy(p[10].feliz, "God Jul!");
+    strcpy(p[11].feliz, "Mutlu Noeller");
+    strcpy(p[12].feliz, "Feliz Navidad!");
+    strcpy(p[13].feliz, "Feliz Navidad!");
+    strcpy(p[14].feliz, "Feliz Navidad!");
+    strcpy(p[15].feliz, "Merry Christmas!");
+    strcpy(p[16].feliz, "Merry Christmas!");
+    strcpy(p[17].feliz, "Nollaig Shona Dhuit!");
+    strcpy(p[18].feliz, "Zalig Kerstfeest!");
+    strcpy(p[19].feliz, "Buon Natale!");
+    strcpy(p[20].feliz, "Buon Natale!");
+    strcpy(p[21].feliz, "Milad Mubarak!");
+    strcpy(p[22].feliz, "Milad Mubarak!");
+    strcpy(p[23].feliz, "Merii Kurisumasu!");
+    while (scanf("%*c%[^\n]", str) != EOF)
+    {
+        for (i = 0; i < aux; i++)
+        {
+            if (strcmp(p[i].pais, str) == 0)
+            {
+                printf("%s\n", p[i].feliz);
+                break;
+            }
+        }
+        if (i >= aux)
+        {
+            printf("-- NOT FOUND --\n");
+        }
+    }
+    return 0;
+}
