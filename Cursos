@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+typedef struct cursos
+{
+    int cod;
+    double valor;
+    char curso[100];
+} Cursos;
+typedef struct alunos
+{
+    char aluno[500];
+    int cod_c, qtd_creditos;
+} Alunos;
+int main()
+{
+    int i, n, x, j;
+    Cursos * p1 = NULL;
+    Alunos * p2 = NULL;
+    scanf("%d", &n);
+    
+    p1 = malloc(sizeof(Cursos)*n);
+    
+    for ( i = 0; i < n; i++)
+    {
+        scanf("%d %lf %[^\n]", &p1[i].cod, &p1[i].valor, p1[i].curso);
+    }
+    scanf("%d", &x);
+    p2 = malloc(sizeof(Cursos)*x);
+    for ( i = 0; i < x; i++)
+    {
+        scanf("%*c%[^\n] %d %d", p2[i].aluno, &p2[i].cod_c, &p2[i].qtd_creditos);
+        for (j = 0; j < n; j++)
+        {
+            if(p2[i].cod_c == p1[j].cod)
+            {
+                printf("Aluno(a): %s Curso: %s Num. Creditos: %d Valor Credito: %.2lf Mensalidade: %.2lf\n", p2[i].aluno, p1[j].curso, p2[i].qtd_creditos, p1[j].valor, p2[i].qtd_creditos*p1[j].valor);
+            }
+        }
+    }
+    free(p1);
+    free(p2);
+    return 0;
+}
