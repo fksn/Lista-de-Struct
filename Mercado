@@ -1,0 +1,79 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+typedef struct listap
+{
+    char nome[50];
+    double preco;
+} ListaP;
+typedef struct listaq
+{
+    char nome[50];
+    int qtd;
+} ListaQ;
+
+int main()
+{
+    ListaP * p1 = NULL;
+    ListaQ * p2 = NULL;
+    char fruta[50];
+    int n, i, x, q, qtd_fruta, j, aux;
+    double preco_total;
+    scanf("%d", &x);
+    scanf("%d", &n);
+    preco_total = 0;
+    p1 = malloc(sizeof(ListaP)*n);
+    for ( i = 0; i < n; i++)
+    {
+        scanf("%s %lf", p1[i].nome, &p1[i].preco);
+    }
+    scanf("%d", &q);
+    p2 = malloc(sizeof(ListaQ)*q);
+    for ( i = 0; i < q; i++)
+    {
+        scanf("%s %d", p2[i].nome, &p2[i].qtd);
+    }
+    for ( i = 0; i < q; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            if (strcmp(p2[i].nome, p1[j].nome) == 0)
+            {
+                preco_total += p2[i].qtd * p1[j].preco;
+            }
+        }
+    }
+    printf("R$ %.2lf\n", preco_total);
+
+
+    for ( aux = 1; aux < x; aux++)
+    {
+        scanf("%d", &n);
+        preco_total = 0;
+        p1 = realloc(p1,sizeof(ListaP)*n);
+        for ( i = 0; i < n; i++)
+        {
+            scanf("%s %lf", p1[i].nome, &p1[i].preco);
+        }
+        scanf("%d", &q);
+        p2 = realloc(p2, sizeof(ListaQ)*q);
+        for ( i = 0; i < q; i++)
+        {
+            scanf("%s %d", p2[i].nome, &p2[i].qtd);
+        }
+        for ( i = 0; i < q; i++)
+        {
+            for (j = 0; j < n; j++)
+            {
+                if (strcmp(p2[i].nome, p1[j].nome) == 0)
+                {
+                    preco_total += p2[i].qtd * p1[j].preco;
+                }
+            }
+        }
+        printf("R$ %.2lf\n", preco_total);
+    }
+    free(p1);
+    free(p2);
+    return 0;
+}
