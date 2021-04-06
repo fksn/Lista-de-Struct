@@ -1,52 +1,52 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+
+typedef struct
+{
+    int num, dem;
+} Frac;
+
 int main()
 {
-    int i = 0, aux = 0, a, x1, x2;
-    char dig, str[50] = " ", str2[5] = " ";
-    int * num = NULL;
-    int * dem = NULL; 
-    num = malloc(sizeof(num));
-    dem = malloc(sizeof(dem));
+    Frac * frac = NULL, * tmp = NULL;
+    int casos, i, ic;
+    int n = 1, f, j;
+    char ch;
+
+    scanf("%d", &casos);
+
     
-    scanf("%c", &dig);
-    while (dig != '\n' && dig != '\0')
+
+    for (ic = 0; ic < casos; ic++)
     {
-        if (dig == '/')
+        frac = (Frac*) calloc(n, sizeof(Frac));
+        printf("Caso de teste %d\n", ic+1);
+        ch = 0;
+        while (ch!='\n')
         {
-            num = realloc(num, sizeof(num)* (i+1));
-            dem[i] = atoi(str);
-            // printf("%d\n", atoi(str));
-            aux = 1;
-            strcpy(str, "0");
+            scanf("%d%*c%d%c", &(frac[n-1].num), &(frac[n-1].dem), &ch);
+            n++;
+            tmp = (Frac*) realloc(frac, n * sizeof(Frac));
+            frac = tmp;
         }
-        if (dig == ' ')
+        f = 0;
+        for ( i = 0; i < (n-2); i++)
         {
-            dem = realloc(dem, sizeof(dem)* (i+1));
-            dem[i] = atoi(str);
-            // printf("%d\n", atoi(str));
-            aux = 0;
-            strcpy(str, "0");
-            i++;
+            for ( j = i+1; j < (n-1); j++)
+            {
+                if ((frac[i].num/(double)frac[i].dem) == (frac[j].num/(double)frac[j].dem))
+                {
+                    f=1;
+                    printf("%d/%d equivalente a %d/%d\n", frac[i].num, frac[i].dem, frac[j].num, frac[j].dem);
+                }
+            }
         }
-        str2[0] = dig;
-        strcat(str, str2);
-        printf("strcat :%s %s %s\n", strcat(str, str2), str, str2);
-        
-        scanf("%c", &dig);
-    }
-    dem = realloc(dem, sizeof(dem)* (i+1));
-    dem[i] = atoi(str);
-    aux = 0;
-    strcpy(str, "0");
-    i++;
-    for (a = 0; a < i; a++)
-    {
-        printf("%d %d\n", num[a], dem[a]);
+        if (f==0)
+        {
+            printf("Nao ha fracoes equivalentes na sequencia\n");
+        }
+        free(frac);
     }
     
-    free(num);
-    free(dem);
     return 0;
 }
